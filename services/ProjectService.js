@@ -1,0 +1,6 @@
+
+class ProjectService{
+    constructor(knex){
+
+    }
+}
