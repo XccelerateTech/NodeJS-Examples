@@ -3,8 +3,8 @@ const express = require("express");
 
 class ProjectRouter{
 
-    constructor(){
-
+    constructor(projectService){
+        this.projectService = projectService;
     }
 
     router(){
@@ -12,7 +12,7 @@ class ProjectRouter{
         router.get("/",this.get.bind(this));
         router.post("/",this.post.bind(this));
         router.put("/:id",this.put.bind(this));
-        router.patch("/:id",this.patch.bind(this));
+        router.patch("/:id",this.put.bind(this));
         router.delete("/:id",this.delete.bind(this));
         return router;
     }
