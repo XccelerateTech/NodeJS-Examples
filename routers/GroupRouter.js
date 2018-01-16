@@ -18,7 +18,7 @@ class GroupRouter{
     }
 
     get(req,res){
-
+        
     }
 
     post(req,res){
