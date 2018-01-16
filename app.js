@@ -2,6 +2,7 @@ const knexFile = require('./knexfile')[process.env.NODE_ENV || 'development' ]
 const knex = require('knex')(knexFile)
 const bodyParser = require('body-parser');
 
+const ViewRouter = require('./ViewRouter');
 
 const GroupRouter = require('./routers/GroupRouter');
 const ProjectRouter = require('./routers/ProjectRouter');
@@ -25,11 +26,11 @@ app.use(express.static("public"));
 
 app.use(bodyParser.json());
 
+app.use('/',new ViewRouter().router());
 
-
-app.use('/groups',new GroupRouter(groupService).router())
-app.use('/project',new ProjectRouter(projectService).router())
-app.use('/users',new UserRouter(userService).router())
+app.use('/api/groups',new GroupRouter(groupService).router())
+app.use('/api/project',new ProjectRouter(projectService).router())
+app.use('/api/users',new UserRouter(userService).router())
 
 app.listen(8080,()=>{
     console.log("Application started at port:8080");

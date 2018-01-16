@@ -18,24 +18,28 @@ class GroupRouter{
     }
 
     get(req,res){
+        //Validation Logic
         this.groupService.list().then((data)=>{
             res.json(data);
         });
     }
 
     post(req,res){
+        //Validation Logic
         this.groupService.create(req.body).then((data)=>{
             res.json(data);
         });
     }
 
     put(req,res){
+        //Validation Logic
         this.groupService.update(req.params.id,req.body).then((data)=>{
             res.json(data);
         })
     }
 
     delete(req,res){
+        //Validation Logic
         this.groupService.delete(req.params.id).then((data)=>{
             res.json(data);
         });

@@ -9,7 +9,6 @@ module.exports = class GroupService{
     }
 
     create(group){
-        // Validation logic
         return this.knex.insert(group).into(GROUPS).returning("id");
     }
 
