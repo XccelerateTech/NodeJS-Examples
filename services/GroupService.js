@@ -10,7 +10,7 @@ module.exports = class GroupService{
 
     create(group){
         // Validation logic
-        return this.knex().insert(group).into(GROUPS).returning("id");
+        return this.knex.insert(group).into(GROUPS).returning("id");
     }
 
 
@@ -20,8 +20,7 @@ module.exports = class GroupService{
 
 
     list(limit=100,offset=0){
-        return this.knex()
-                    .select("*")
+        return this.knex.select("*")
                     .from(GROUPS)
                     .limit(limit).offset(offset);
     }
@@ -33,8 +32,7 @@ module.exports = class GroupService{
     }
 
     search(searchCriteria,limit=100,offset=0){
-        return this.knex()
-                    .select("*").from(GROUPS)
+        return this.knex.select("*").from(GROUPS)
                     .where(searchCriteria)
                     .limit(limit).offset(offset);
     }

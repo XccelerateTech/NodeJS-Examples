@@ -1,5 +1,7 @@
 const knexFile = require('./knexfile')[process.env.NODE_ENV || 'development' ]
 const knex = require('knex')(knexFile)
+const bodyParser = require('body-parser');
+
 
 const GroupRouter = require('./routers/GroupRouter');
 const ProjectRouter = require('./routers/ProjectRouter');
@@ -20,6 +22,8 @@ const hb = require('express-handlebars');
 app.engine('handlebars', hb({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.use(express.static("public"));
+
+app.use(bodyParser.json());
 
 
 

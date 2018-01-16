@@ -8,33 +8,31 @@ module.exports = class UserService{
         this.knex = knex;
     }
 
-    create(group){
+    create(user){
         // Validation logic
-        return this.knex().insert(group).into(USERS).returning("id");
+        return this.knex.insert(user).into(USERS).returning("id");
     }
 
 
-    delete(groupId){
-        return this.knex(USERS).where("id",groupId).del();
+    delete(userId){
+        return this.knex(USERS).where("id",userId).del();
     }
 
 
     list(limit=100,offset=0){
-        return this.knex()
-                    .select("*")
+        return this.knex.select("*")
                     .from(USERS)
                     .limit(limit).offset(offset);
     }
 
-    update(id,group){
+    update(id,user){
         return this.knex(USERS)
-                    .update(group)
+                    .update(user)
                     .where("id",id);
     }
 
     search(searchCriteria,limit=100,offset=0){
-        return this.knex()
-                    .select("*").from(USERS)
+        return this.knex.select("*").from(USERS)
                     .where(searchCriteria)
                     .limit(limit).offset(offset);
     }

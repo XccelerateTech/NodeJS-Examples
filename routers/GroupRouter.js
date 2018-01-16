@@ -18,19 +18,27 @@ class GroupRouter{
     }
 
     get(req,res){
-        
+        this.groupService.list().then((data)=>{
+            res.json(data);
+        });
     }
 
     post(req,res){
-
+        this.groupService.create(req.body).then((data)=>{
+            res.json(data);
+        });
     }
 
     put(req,res){
-
+        this.groupService.update(req.params.id,req.body).then((data)=>{
+            res.json(data);
+        })
     }
 
     delete(req,res){
-
+        this.groupService.delete(req.params.id).then((data)=>{
+            res.json(data);
+        });
     }
 }
 

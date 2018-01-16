@@ -18,19 +18,27 @@ class ProjectRouter{
     }
 
     get(req,res){
-
+        this.projectService.list().then((data)=>{
+            res.json(data);
+        });
     }
 
     post(req,res){
-
+        this.projectService.create(req.body).then((data)=>{
+            res.json(data);
+        });
     }
 
     put(req,res){
-
+        this.projectService.update(req.params.id,req.body).then((data)=>{
+            res.json(data);
+        })
     }
 
     delete(req,res){
-
+        this.projectService.delete(req.params.id).then((data)=>{
+            res.json(data);
+        });
     }
 }
 

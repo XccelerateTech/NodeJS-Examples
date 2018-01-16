@@ -7,38 +7,35 @@ module.exports = class ProjectService{
         this.knex = knex;
     }
 
-    create(group){
+    create(project){
         // Validation logic
-        return this.knex()
-                    .insert(group)
+        return this.knex.insert(project)
                     .into(PROJECTS)
                     .returning("id");
     }
 
 
-    delete(groupId){
+    delete(projectId){
         return this.knex(PROJECTS)
-                    .where("id",groupId)
+                    .where("id",projectId)
                     .del();
     }
 
 
     list(limit=100,offset=0){
-        return this.knex()
-                    .select("*")
+        return this.knex.select("*")
                     .from(PROJECTS)
                     .limit(limit).offset(offset);
     }
 
-    update(id,group){
+    update(id,project){
         return this.knex(PROJECTS)
-                    .update(group)
+                    .update(project)
                     .where("id",id);
     }
 
     search(searchCriteria,limit=100,offset=0){
-        return this.knex()
-                    .select("*").from(PROJECTS)
+        return this.knex.select("*").from(PROJECTS)
                     .where(searchCriteria)
                     .limit(100).offset(0);
     }
