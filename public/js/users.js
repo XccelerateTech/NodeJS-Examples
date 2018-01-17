@@ -1,7 +1,7 @@
 $(()=>{
     $.get('/api/users').then((data)=>{
         console.log(data);
-        let usersInfoContainer = $('#users-info-container').clone();
+        let usersInfoContainer = $('#template-info-container').clone();
         let userInfo = usersInfoContainer.contents().find('p');
         data.forEach(e => {
             userInfo.eq(0).html(e.first_name);
