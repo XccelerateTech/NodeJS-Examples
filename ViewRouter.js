@@ -6,7 +6,6 @@ module.exports = class ViewRouter{
         const router = express.Router();
         router.get('/users',(req,res)=>res.render("users"));
         router.get('/groups',(req,res)=>res.render("groups"));
-        router.get('/projects',(req,res)=>res.render("projects"));
         return router;
     }
 

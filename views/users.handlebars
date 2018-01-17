@@ -1,10 +1,14 @@
 <script type='text/javascript' src="/js/users.js"></script>
+<link rel="stylesheet" href="/css/user.css">
 <div>
-    <ul>
-        {{#users}}
-        <li>Name: {{name}}</li>
-        <li>First Name: {{firstName}}</li>
-        <li>Last Name: {{lastName}}</li>
-        {{/users}}
-    </ul>
+    <div id='user-list'>
+    </div>
 </div>
+<template id="users-info-container">
+    <div class="user-info-container">
+        <img class="user-avator" src="/images/male-user-100.png" alt="avator">
+        <label class="lbl-info">First Name: </label><p></p>
+        <label class="lbl-info">Last Name: </label><p></p>
+        <label class="lbl-info">Email: </label><p></p>
+    </div>
+</template>
