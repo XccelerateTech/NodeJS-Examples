@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const hb = require('express-handlebars');
 const passport = require('passport')
 const express = require('express');
+const FacebookStrategy = require('passport-facebook').Strategy;
 require('dotenv').config();
 
 module.exports = (app)=>{
@@ -21,4 +22,14 @@ module.exports = (app)=>{
     passport.deserializeUser((user,done)=>{
         done(null,user);
     });
+
+    passport.use(new FacebookStrategy({
+        clientID: process.env.FACEBOOK_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: `http://${process.env.CALLBACK_HOSTNAME}/auth/facebook/callback`
+      },
+      (accessToken, refreshToken, profile, cb)=>{
+        return cb(null,{profile:profile,accessToken:accessToken});
+      }
+    ));
 }

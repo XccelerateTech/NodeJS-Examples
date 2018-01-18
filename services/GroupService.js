@@ -6,7 +6,7 @@ module.exports = class GroupService{
 
     constructor(knex,redisService){
         this.knex = knex;
-        this.redisSession = redisService;
+        this.redisService = redisService;
     }
 
     create(group){
