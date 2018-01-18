@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const hb = require('express-handlebars');
 
 
-module.exports = ()=>{
+module.exports = (redisService)=>{
     let app = express();
     let server = require('http').Server(app);
     let io = require('socket.io')(server);
@@ -11,6 +11,9 @@ module.exports = ()=>{
     app.set('view engine', 'handlebars');
     app.use(express.static("public"));
     app.use(bodyParser.json());
+
+    require('./init-sessions')(app,io,redisService);
+    require('./init-passport')(app);
 
     return{
         app : app,

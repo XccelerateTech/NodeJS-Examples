@@ -21,9 +21,8 @@ let userService = new UserService(knex,redisService);
 
 
 
-const {app,server,io} = require('./utils/init-app')();
-require('./utils/init-sessions')(app,io,redisService);
-require('./utils/init-passport')(app);
+const {app,server,io} = require('./utils/init-app')(redisService);
+
 
 new SocketIORouter(io).router();
 app.use('/',new ViewRouter().router());
