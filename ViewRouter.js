@@ -13,9 +13,8 @@ module.exports = class ViewRouter{
             scope: ['user_friends', 'manage_pages'] 
         }));
         router.get("/auth/facebook/callback",passport.authenticate('facebook',{
-            successRedirect: "/users",
             failureRedirect: "/"
-        }));
+        }),(req,res)=>res.redirect('/users'));
         return router;
     }
 }
