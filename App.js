@@ -17,9 +17,9 @@ class App{
     }
 
     init(){
-        initServer();
-        initSessions();
-        initPassport();
+        this.initServer();
+        this.initSessions();
+        this.initPassport();
         return this;
     }
 
