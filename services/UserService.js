@@ -4,9 +4,9 @@ const USERS = require("./tables").USERS;
 
 module.exports = class UserService{
 
-    constructor(knex,redisService){
+    constructor(knex,redisClient){
         this.knex = knex;
-        this.redisService = redisService;
+        this.redisClient = redisClient;
     }
 
     create(user){

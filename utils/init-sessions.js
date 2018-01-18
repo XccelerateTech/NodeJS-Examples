@@ -2,9 +2,9 @@ const expressSession = require('express-session');
 const RedisStore = require('connect-redis')(expressSession);
 const socketIOSession = require("socket.io.session");
 
-module.exports = (app,io,redisService)=>{
+module.exports = (app,io,redisClient)=>{
     const sessionStore = new RedisStore({
-        client: redisService.client,
+        client: redisClient,
         unset: "destroy"
     });
     const settings = {

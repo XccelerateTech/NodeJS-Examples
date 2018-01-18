@@ -1,6 +1,17 @@
 // General Initialization
-const knexFile = require('./knexfile')[process.env.NODE_ENV || 'development' ]
+require('dotenv').config();
+const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
+const REDIS_PORT = process.env.REDIS_PORT || 6379
+const NODE_ENV = process.env.NODE_ENV || 'development' 
+
+const knexFile = require('./knexfile')[NODE_ENV]
 const knex = require('knex')(knexFile)
+
+const redis = require('redis');
+const redisClient = redis.createClient({
+    host: REDIS_HOST,
+    port: REDIS_PORT
+})
 
 const isLoggedIn = require('./utils/guard').isLoggedIn;
 
@@ -15,11 +26,10 @@ const { GroupService,
         UserService,
         RedisService} = require('./services');
 
-let redisService = new RedisService();
-let groupService = new GroupService(knex,redisService);
-let userService = new UserService(knex,redisService);
+let groupService = new GroupService(knex,redisClient);
+let userService = new UserService(knex,redisClient);
 
-const {app,server,io} = require('./utils/init-app')(redisService);
+const {app,server,io} = require('./utils/init-app')(redisClient);
 
 
 new SocketIORouter(io).router();
