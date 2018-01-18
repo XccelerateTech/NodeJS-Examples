@@ -1,30 +1,35 @@
+// General Initialization
 const knexFile = require('./knexfile')[process.env.NODE_ENV || 'development' ]
 const knex = require('knex')(knexFile)
-const bodyParser = require('body-parser');
 
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+require('./init')(app);
+
+// Dependency Injection for Routers and Service
 const ViewRouter = require('./ViewRouter');
-
 const GroupRouter = require('./routers/GroupRouter');
 const UserRouter = require('./routers/UserRouter');
 
 const GroupService = require('./services/GroupService');
 const UserService = require('./services/UserService');
+const FacebookAuthService = require('./services/FacebookAuthService');
+const RedisService = require('./services/RedisService');
+const SessionService = require('./services/SessionService');
 
-let groupService = new GroupService(knex);
-let userService = new UserService(knex);
+let redisService = new RedisService();
+let groupService = new GroupService(knex,redisService);
+let userService = new UserService(knex,redisService);
+let facebookAuthService = new FacebookAuthService();
+let sessionService = new SessionService(redisService);
 
-const express = require('express');
+// Routes
+io.use(sessionService.socketIO());
 
-const app = express();
-const hb = require('express-handlebars');
-app.engine('handlebars', hb({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-app.use(express.static("public"));
-
-app.use(bodyParser.json());
-
+app.use(sessionService.express());
 app.use('/',new ViewRouter().router());
-
 app.use('/api/groups',new GroupRouter(groupService).router())
 app.use('/api/users',new UserRouter(userService).router())
 

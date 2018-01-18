@@ -3,6 +3,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 require('dotenv').config();
 
 module.exports = class FacebookAuthService{
+    
 
     constructor(){
         passport.use(new FacebookStrategy({
@@ -10,7 +11,7 @@ module.exports = class FacebookAuthService{
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
             callbackURL: "http://localhost:8080/auth/facebook/callback"
           },
-          function(accessToken, refreshToken, profile, cb) {
+          (accessToken, refreshToken, profile, cb)=>{
             return cb(null,{profile:profile,accessToken:accessToken});
           }
         ));

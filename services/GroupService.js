@@ -4,8 +4,9 @@ const GROUPS = require("./tables").GROUPS;
 
 module.exports = class GroupService{
 
-    constructor(knex){
+    constructor(knex,redisService){
         this.knex = knex;
+        this.redisSession = redisService;
     }
 
     create(group){
