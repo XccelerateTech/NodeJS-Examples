@@ -14,20 +14,23 @@ const GroupService = require('./services/GroupService');
 const UserService = require('./services/UserService');
 const RedisService = require('./services/RedisService');
 
-const App = require('./App');
 
 let redisService = new RedisService();
 let groupService = new GroupService(knex,redisService);
 let userService = new UserService(knex,redisService);
 
-// Routes
 
 
-let app = new App(redisService).init();
-new SocketIORouter(app.io).router();
-app.expressApp.use('/',new ViewRouter().router());
-app.expressApp.use('/api/groups',isLoggedIn,new GroupRouter(groupService).router());
-app.expressApp.use('/api/users',isLoggedIn,new UserRouter(userService).router());
+const {app,server,io} = require('./utils/init-app')();
+require('./utils/init-sessions')(app,io,redisService);
+require('./utils/init-passport')(app);
+
+new SocketIORouter(io).router();
+app.use('/',new ViewRouter().router());
+app.use('/api/groups',isLoggedIn,new GroupRouter(groupService).router());
+app.use('/api/users',isLoggedIn,new UserRouter(userService).router());
 
 
-app.start();
+server.listen(8080,()=>{
+    console.log("Application started at port:8080");
+});
