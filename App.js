@@ -49,8 +49,8 @@ class App{
     }
 
     initPassport(){
-        app.use(passport.initialize());
-        app.use(passport.session());
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
 
         passport.serializeUser((user,done)=>{
             done(null,user);
