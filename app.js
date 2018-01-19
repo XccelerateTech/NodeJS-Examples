@@ -23,8 +23,7 @@ const { GroupRouter,
         SocketIORouter} = require('./routers');
 
 const { GroupService,
-        UserService,
-        RedisService} = require('./services');
+        UserService} = require('./services');
 
 let groupService = new GroupService(knex,redisClient);
 let userService = new UserService(knex,redisClient);
