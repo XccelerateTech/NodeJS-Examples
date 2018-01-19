@@ -1,27 +1,31 @@
 const GroupRouter = require('../../routers/GroupRouter')
 
-describe('GroupRouter should',()=>{
+describe('GroupRouter ',()=>{
     let groupRouter ;
-    let request;
-    let response;
+    let groupService;
+    let req;
+    let res;
 
     beforeEach(()=>{
-        groupRouter = new GroupRouter();
+        groupService = jasmine.createSpy();
+        groupRouter = new GroupRouter(groupService);
+        req = jasmine.createSpy();
+        res = jasmine.createSpy();
     });
 
-    it("support get method",()=>{
+    it(" should support get method",()=>{
         groupRouter.get(req,res)
     });
 
-    it("support post method",()=>{
-
+    it(" should support post method",()=>{
+        groupRouter.post(req,res);
     });
 
-    it("support put method",()=>{
-
+    it(" should support put method",()=>{
+        groupRouter.put(req,res);
     });
 
-    it("support delete method",()=>{
-
+    it(" should support delete method",()=>{
+        groupRouter.delete(req,res);
     });
 })
