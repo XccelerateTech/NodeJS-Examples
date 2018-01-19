@@ -1,31 +1,62 @@
-const GroupRouter = require('../../routers/GroupRouter')
+const GroupRouter = require('../../routers/GroupRouter');
 
 describe('GroupRouter ',()=>{
-    let groupRouter ;
-    let groupService;
+    let groupRouter;
     let req;
     let res;
+    let groups = [
+        {
+            id:1,
+            name:"group1",
+            created_at:  Date.now(),
+            updated_at: Date.now()
+        },
+        {
+            id:2,
+            name:"group2",
+            created_at:  Date.now(),
+            updated_at: Date.now()
+        }
+    ]
 
     beforeEach(()=>{
-        groupService = jasmine.createSpy();
+        groupService = jasmine.createSpyObj("groupService",{
+                list : Promise.resolve(groups),
+                create: Promise.resolve([1]),
+                update: Promise.resolve([1]),
+                delete: Promise.resolve([1])
+        });
         groupRouter = new GroupRouter(groupService);
-        req = jasmine.createSpy();
-        res = jasmine.createSpy();
+        req = jasmine.createSpyObj('req',['params','query','body']);
+        res = jasmine.createSpyObj('res',['json']); 
+        
     });
 
-    it(" should support get method",()=>{
-        groupRouter.get(req,res)
+    it(" should support get method",(done)=>{
+        groupRouter.get(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith(groups);
+            done();
+        })
     });
 
-    it(" should support post method",()=>{
-        groupRouter.post(req,res);
+    it(" should support post method",(done)=>{
+        groupRouter.post(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 
-    it(" should support put method",()=>{
-        groupRouter.put(req,res);
+    it(" should support put method",(done)=>{
+        groupRouter.put(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 
-    it(" should support delete method",()=>{
-        groupRouter.delete(req,res);
+    it(" should support delete method",(done)=>{
+        groupRouter.delete(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 })
