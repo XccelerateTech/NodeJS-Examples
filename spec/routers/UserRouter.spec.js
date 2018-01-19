@@ -1,31 +1,56 @@
-const UserRouter = require('../../routers/UserRouter')
+const {UserRouter} = require('../../routers')
 
 describe('UserRouter should',()=>{
-    let userRouter ;
-    let userService; 
+    let userRouter ; 
+    let userService;
     let req;
     let res;
-
+    let users = [
+        {
+            first_name: "Gordon",
+            last_name: "Lau",
+            email :"gordon@gmail.com",
+            created_at: new Date(),
+            updated_at: new Date()
+        }
+    ]
     beforeEach(()=>{
-        userService = jasmine.createSpy();
+        userService = jasmine.createSpyObj("userService",{
+            list : Promise.resolve(users),
+            create: Promise.resolve([1]),
+            update: Promise.resolve([1]),
+            delete: Promise.resolve([1])
+        });
         userRouter = new UserRouter(userService);
-        req = jasmine.createSpy();
-        res = jasmine.createSpy();
+        req = jasmine.createSpyObj('req',['params','query','body']);
+        res = jasmine.createSpyObj('res',['json']); 
     });
 
-    it("support get method",()=>{
-        userRouter.get(req,res)
+    it("support get method",(done)=>{
+        userRouter.get(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith(users);
+            done();
+        })
     });
 
-    it("support post method",()=>{
-        userRouter.post(req,res);
+    it("support post method",(done)=>{
+        userRouter.post(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 
-    it("support put method",()=>{
-        userRouter.put(req,res);
+    it("support put method",(done)=>{
+        userRouter.put(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 
-    it("support delete method",()=>{
-        userRouter.delete(req,res);
+    it("support delete method",(done)=>{
+        userRouter.delete(req,res).then(()=>{
+            expect(res.json).toHaveBeenCalledWith([1])
+            done();
+        });
     });
 })

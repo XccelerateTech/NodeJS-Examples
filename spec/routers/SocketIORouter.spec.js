@@ -9,11 +9,17 @@ describe('SocketIORouter ',()=>{
     beforeEach(()=>{
         io = jasmine.createSpy();
         socketIORouter = new SocketIORouter(io);
-        socket = jasmine.createSpy();
+        socket = jasmine.createSpyObj("socket",["emit"]);
+        socket.session = {
+            passport:{
+                user: "Gordon"
+            }
+        }
     });
 
     it("should support connection event",()=>{
         socketIORouter.connection(socket);
+        expect(socket.emit).toHaveBeenCalledWith("username","Gordon");
     });
 
 });

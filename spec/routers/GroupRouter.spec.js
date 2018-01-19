@@ -1,21 +1,22 @@
-const GroupRouter = require('../../routers/GroupRouter');
+const {GroupRouter} = require('../../routers');
 
 describe('GroupRouter ',()=>{
     let groupRouter;
+    let groupService;
     let req;
     let res;
     let groups = [
         {
             id:1,
             name:"group1",
-            created_at:  Date.now(),
-            updated_at: Date.now()
+            created_at:  new Date(),
+            updated_at: new Date()
         },
         {
             id:2,
             name:"group2",
-            created_at:  Date.now(),
-            updated_at: Date.now()
+            created_at:  new Date(),
+            updated_at: new Date()
         }
     ]
 

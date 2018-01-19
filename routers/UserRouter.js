@@ -18,25 +18,25 @@ class UserRouter{
     }
 
     get(req,res){
-        this.userService.list()
+        return this.userService.list()
             .then((data)=>res.json(data))
             .catch((err)=>res.status(500).json(err));
     }
 
     post(req,res){
-        this.userService.create(req.body)
+        return this.userService.create(req.body)
             .then((data)=>res.json(data))
             .catch((err)=>res.status(500).json(err));
     }
 
     put(req,res){
-        this.userService.update(req.params.id,req.body)
+        return this.userService.update(req.params.id,req.body)
             .then((data)=>res.json(data))
             .catch((err)=> res.status(500).json(err));
     }
 
     delete(req,res){
-        this.userService.delete(req.params.id)
+        return this.userService.delete(req.params.id)
             .then((data)=>res.json(data))
             .catch((err)=> res.status(500).json(err));
     }
