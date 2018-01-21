@@ -1,0 +1,32 @@
+{
+	"info": {
+		"name": "NodeJS_Example",
+		"_postman_id": "39afa5e2-9be7-534e-fedf-882cbf202bda",
+		"description": "NodeJS Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get_Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groups"
+					]
+				},
+				"description": "Get Groups"
+			},
+			"response": []
+		}
+	]
+}
