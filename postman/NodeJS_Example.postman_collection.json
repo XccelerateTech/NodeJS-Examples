@@ -13,12 +13,10 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/api/groups",
-					"protocol": "http",
+					"raw": "{{url}}/api/groups",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"groups"
