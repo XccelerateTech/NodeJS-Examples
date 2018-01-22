@@ -1,21 +1,21 @@
 {
-  "name": "knex-express",
+  "name": "NodeJS-Examples",
   "version": "1.0.0",
-  "description": "An example of using Knex the SQL builder with Express framework.",
+  "description": "NodeJS Examples for Accelerate Curriculum",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acceleratehk/knex-express.git"
+    "url": "git+https://github.com/acceleratehk/NodeJS-Examples.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/acceleratehk/knex-express/issues"
+    "url": "https://github.com/acceleratehk/NodeJS-Examples/issues"
   },
-  "homepage": "https://github.com/acceleratehk/knex-express#readme",
+  "homepage": "https://github.com/acceleratehk/NodeJS-Examples#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "connect-redis": "^3.3.3",
