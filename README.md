@@ -16,6 +16,7 @@ NODE_ENV=development
 PORT=8080
 ```
 
+Install NPM Packages
 ```
 npm install
 ```
