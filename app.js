@@ -31,7 +31,7 @@ let userService = new UserService(knex,redisClient);
 const {app,server,io} = require('./utils/init-app')(redisClient);
 
 
-new SocketIORouter(io).router();
+new SocketIORouter(io,userService).router();
 app.use('/',new ViewRouter().router());
 app.use('/api/groups',isLoggedIn,new GroupRouter(groupService).router());
 app.use('/api/users',isLoggedIn,new UserRouter(userService).router());
