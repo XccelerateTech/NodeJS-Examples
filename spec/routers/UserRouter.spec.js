@@ -26,6 +26,10 @@ describe('UserRouter should',()=>{
         res = jasmine.createSpyObj('res',['json']); 
     });
 
+    it(" should run router method successfully",()=>{
+        userRouter.router();
+    });
+
     it("support get method",(done)=>{
         userRouter.get(req,res).then(()=>{
             expect(res.json).toHaveBeenCalledWith(users);
