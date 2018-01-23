@@ -2,8 +2,9 @@
 
 class SocketIORouter{
 
-    constructor(io){
+    constructor(io,userService){
         this.io = io;
+        this.userService = userService;
     }
 
     router(){
@@ -19,7 +20,18 @@ class SocketIORouter{
 
     connection(socket){
         socket.emit('username', socket.session.passport.user);
+
+        socket.on('getUsers',this.getUsers(socket).bind(this));
     }
+
+    getUsers(socket){
+        return (data)=>{
+            return this.userService.list().then((users)=>{
+                socket.emit('users',users);
+            });
+        };
+    }
+    
 }
 
 module.exports = SocketIORouter
