@@ -28,9 +28,14 @@ describe('GroupRouter ',()=>{
                 delete: Promise.resolve([1])
         });
         groupRouter = new GroupRouter(groupService);
+        groupRouter.router();
         req = jasmine.createSpyObj('req',['params','query','body']);
         res = jasmine.createSpyObj('res',['json']); 
         
+    });
+
+    it(" should run router method successfully",()=>{
+        groupRouter.router();
     });
 
     it(" should support get method",(done)=>{
