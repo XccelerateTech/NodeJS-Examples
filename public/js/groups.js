@@ -1,11 +1,15 @@
 $(()=>{
     $.get('/api/groups').then((data)=>{
-        console.log(data);
-        let groupsInfoContainer = $('#template-info-container').clone();
-        let groupInfo = groupsInfoContainer.contents().find('p');
         data.forEach(e => {
-            groupInfo.eq(0).html(e.name);
-            $('#group-list').append(groupsInfoContainer.html());
+            $('#group-list').append(Group(e.name));
         });
     });
+
+    const Group = (name)=>{
+        return `
+            <div class="info-container">
+                <img class="avator" src="/images/male-user-100.png" alt="avator">
+                <label class="lbl-info">Group Name: </label><p>${name}</p>
+            </div>`
+    }
 })

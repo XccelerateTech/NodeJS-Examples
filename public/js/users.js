@@ -1,13 +1,16 @@
 $(()=>{
     $.get('/api/users').then((data)=>{
-        console.log(data);
-        let usersInfoContainer = $('#template-info-container').clone();
-        let userInfo = usersInfoContainer.contents().find('p');
-        data.forEach(e => {
-            userInfo.eq(0).html(e.first_name);
-            userInfo.eq(1).html(e.last_name);
-            userInfo.eq(2).html(e.email);
-            $('#user-list').append(usersInfoContainer.html());
+        data.forEach(e=>{
+            $('#user-list').append(User(e.first_name,e.last_name,e.email));
         });
     });
+    const User = (firstName, lastName,email)=>{
+        return `
+            <div class="info-container">
+                <img class="avator" src="/images/male-user-100.png" alt="avator">
+                <label class="lbl-info">First Name: </label><p>${firstName}</p>
+                <label class="lbl-info">Last Name: </label><p>${lastName}</p>
+                <label class="lbl-info">Email: </label><p>${email}</p>
+            </div>`
+    };
 })
