@@ -12,6 +12,8 @@ const redisClient = redis.createClient({
     host: REDIS_HOST,
     port: REDIS_PORT
 })
+const fs = require('fs');
+const https = require('https')
 
 const isLoggedIn = require('./utils/guard').isLoggedIn;
 
@@ -37,6 +39,12 @@ app.use('/api/groups',isLoggedIn,new GroupRouter(groupService).router());
 app.use('/api/users',isLoggedIn,new UserRouter(userService).router());
 
 
-server.listen(8080,()=>{
-    console.log("Application started at port:8080");
-});
+const httpsOptions = {
+    key: fs.readFileSync('./localhost.key'),
+    cert: fs.readFileSync('./localhost.crt')
+}
+
+
+https.createServer(httpsOptions, app).listen(8443, () => {
+    console.log('server running at ' + 8443)
+})
